@@ -33,3 +33,26 @@ function task2(matrix, rotations) {
     matrix.forEach(line => result += line.join("_") + "\n");
     return result;
 }
+
+
+function rotateClockwise(matrix, rotations) {
+    let result = ''
+    if (rotations % 4 === 0) {
+        matrix.forEach(row => result += row.join("_") + "\n");
+        return result
+    }
+    let n = matrix.length;
+    for (let r = 0; r < rotations; r++) {
+        for (let i = 0; i < n / 2; i++) {
+            for (let j = i; j < n - i - 1; j++) {
+                let tmp = matrix[i][j];
+                matrix[i][j] = matrix[n - j - 1][i];
+                matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+                matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+                matrix[j][n - i - 1] = tmp;
+            }
+        }
+    }
+    matrix.forEach(row => result += row.join("_") + "\n");
+    return result
+}
